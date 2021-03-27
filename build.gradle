@@ -1,0 +1,52 @@
+// 프로젝트의 의존성 관리를 위한 설정
+// dependency management 설정인가 보다..
+buildscript {
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+// gradle plugin
+// 재사용 가능한 빌드 로직을 패키지화하여 사용할 수 있도록 한 것.
+
+// plugins 문법이 apply plugin 보다 새 방식이다.
+// gradle plugin repository 에 있는 plugin 을 읽어오는? 역할을 한다.
+// apply plugin 은 회사나 개인의 plugin 을 적용할 수 있다. 그래서 예제에서 사용하는 듯.
+// plugins {
+//     id 'java'
+// }
+
+// java 와 spring-boot 를 사용하기 위한 필수 플러그인
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    // buildscript 에 명시한 springBootVersion 을 따라가게 된다.
+    // 버전 관리가 한 곳에 집중되고 버전 충돌 문제가 해결된다.
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+test {
+    useJUnitPlatform()
+}
