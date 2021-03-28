@@ -2,7 +2,7 @@
 // dependency management 설정인가 보다..
 buildscript {
     ext {
-        springBootVersion = '2.1.7.RELEASE'
+        springBootVersion = "2.1.7.RELEASE"
     }
     repositories {
         mavenCentral()
@@ -29,7 +29,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group 'org.example'
+group 'com.dnd.example'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -38,8 +38,9 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    // 없어도 TC 정상 수행되서 주석 처리 함
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     // buildscript 에 명시한 springBootVersion 을 따라가게 된다.
     // 버전 관리가 한 곳에 집중되고 버전 충돌 문제가 해결된다.
@@ -47,6 +48,9 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-test {
-    useJUnitPlatform()
-}
+// 자동으로 생성된 테스트 관련 설정인데,
+// 책에 나온대로 TC 작성, 수행시 ScriptEvaluationException 발생.
+// 주석 처리 후 정상 수행됨
+//test {
+//    useJUnitPlatform()
+//}
