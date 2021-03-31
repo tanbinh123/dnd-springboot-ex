@@ -45,12 +45,19 @@ dependencies {
     // buildscript 에 명시한 springBootVersion 을 따라가게 된다.
     // 버전 관리가 한 곳에 집중되고 버전 충돌 문제가 해결된다.
     compile('org.springframework.boot:spring-boot-starter-web')
+
+    // lombok 사용을 위해
+    // 1. 의존성 추가
+    // 2. intellij lombok plugin 추가
+    // 3. intellij "Enable annotation processing" 옵션 on 설정
+    compile('org.projectlombok:lombok')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 // 자동으로 생성된 테스트 관련 설정인데,
-// 책에 나온대로 TC 작성, 수행시 ScriptEvaluationException 발생.
-// 주석 처리 후 정상 수행됨
+// 책에 나온대로 TC 실행시 ScriptEvaluationException 발생.
+// 주석 처리 후 정상 실행됨
 //test {
 //    useJUnitPlatform()
 //}
