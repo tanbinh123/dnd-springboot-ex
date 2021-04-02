@@ -52,6 +52,12 @@ dependencies {
     // 3. intellij "Enable annotation processing" 옵션 on 설정
     compile('org.projectlombok:lombok')
 
+    // Jpa 사용을 위해 의존성 추가
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+    // 인메모리 관계형 데이터베이스(테스트용)
+    compile('com.h2database:h2')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
