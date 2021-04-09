@@ -43,4 +43,23 @@ public class PostsRepositoryTest {
         assertThat(posts.getTitle()).isEqualTo(title);
         assertThat(posts.getContent()).isEqualTo(content);
     }
+
+    @Test
+    public void baseTimeEntity_working() {
+        // given
+        postsRepository.save(Posts.builder()
+                .title("title")
+                .content("content")
+                .author("thenewseason@daum.net")
+                .build());
+
+        // when
+        List<Posts> postsList = postsRepository.findAll();
+
+        // then
+        Posts posts = postsList.get(0);
+
+        assertThat(posts.getCreatedDate()).isNotNull();
+        assertThat(posts.getModifiedDate()).isNotNull();
+    }
 }
