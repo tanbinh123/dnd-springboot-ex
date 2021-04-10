@@ -58,6 +58,9 @@ dependencies {
     // 인메모리 관계형 데이터베이스(테스트용)
     compile('com.h2database:h2')
 
+    // mustache 의존성
+    compile('org.springframework.boot:spring-boot-starter-mustache')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
