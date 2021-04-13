@@ -2,12 +2,16 @@ package com.dnd.example.springboot.service;
 
 import com.dnd.example.springboot.domain.post.Posts;
 import com.dnd.example.springboot.domain.post.PostsRepository;
+import com.dnd.example.springboot.web.dto.PostsListResponseDto;
 import com.dnd.example.springboot.web.dto.PostsResponseDto;
 import com.dnd.example.springboot.web.dto.PostsSaveRequestDto;
 import com.dnd.example.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -40,5 +44,13 @@ public class PostsService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 
         return new PostsResponseDto(entity);
+    }
+
+    // readOnly = true 옵션 : transaction 범위는 유지하되, 조회 기능만 남겨서 속도가 개선됨
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> fndAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new) // 실제로는 .map(posts -> new PostsListResponseDto(posts)) 로 동작함
+                .collect(Collectors.toList());
     }
 }
