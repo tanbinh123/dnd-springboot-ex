@@ -1,12 +1,17 @@
 package com.dnd.example.springboot.web;
 
 import com.dnd.example.springboot.service.PostsService;
+import com.dnd.example.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RequiredArgsConstructor
+// 화면이동을 담당하는 컨트롤러
+// mustache 파일을 연결시켜주는 역할 -> String 을 리턴(mustache 경로)
+// 그래서 @RestController 가 아닌 @Controller 를 사용 
 @Controller
 public class IndexController {
 
@@ -29,6 +34,19 @@ public class IndexController {
 
     @GetMapping("/posts/save")
     public String register() {
+
         return "posts-save";
+    }
+
+    @GetMapping("/posts/update/{id}")
+    public String update(
+            @PathVariable Long id,
+            Model model
+    ) {
+        PostsResponseDto dto = postsService.findById(id);
+
+        model.addAttribute("post", dto);
+
+        return "posts-update";
     }
 }
