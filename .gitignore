@@ -17,3 +17,6 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 .idea
+
+# oauth 관련 key 정보 파일
+application-oauth.properties
