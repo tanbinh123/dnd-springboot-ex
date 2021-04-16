@@ -61,6 +61,10 @@ dependencies {
     // mustache 의존성
     compile('org.springframework.boot:spring-boot-starter-mustache')
 
+    // 스프링 시큐리티 의존성
+    // spring-security-oauth2-client, spring-security-oauth2-jose 를 관리해줌
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
