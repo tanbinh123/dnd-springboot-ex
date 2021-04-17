@@ -1,5 +1,6 @@
 package com.dnd.example.springboot.web;
 
+import com.dnd.example.springboot.config.auth.LoginUser;
 import com.dnd.example.springboot.config.auth.dto.SessionUser;
 import com.dnd.example.springboot.service.PostsService;
 import com.dnd.example.springboot.web.dto.PostsResponseDto;
@@ -22,12 +23,11 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
 
         // 서버 템플릿엔진에서 사용할 수 있는 객체를 저장
         model.addAttribute("posts", postsService.fndAllDesc());
 
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
