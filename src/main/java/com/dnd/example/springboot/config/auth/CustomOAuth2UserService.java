@@ -48,7 +48,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         User user = saveOrUpdate(attributes);
 
         // SessionUser : 세션에 사용자 정보를 저장하기 위한 Dto 클래스
-        // 서버가 여러대일 경우를 고려해서 세션 대신 쿠키로 전환하는게 좋을 듯 
+        // 세션 저장소 개선 방안 (2대 이상 서버 고려)
+        // 1. 데이터 베이스에 저장 (성능 이슈)
+        // 2. Redis 에 저장 (별도 시스템 필요)
+        // 3. 쿠키에 저장 (보안 이슈)
         httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOAuth2User(
