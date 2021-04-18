@@ -69,6 +69,9 @@ dependencies {
     compile('org.springframework.session:spring-session-jdbc')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    // 스프링 시큐리티를 테스트하기 위해 임의 사용자 등록 등을 지원하는 립
+    testCompile('org.springframework.security:spring-security-test')
 }
 
 // 자동으로 생성된 테스트 관련 설정인데,
