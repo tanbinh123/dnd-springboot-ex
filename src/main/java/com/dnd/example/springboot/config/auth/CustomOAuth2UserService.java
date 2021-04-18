@@ -45,6 +45,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         // OAuth2UserService 를 통해 가져온 OAuth2User 의 attribute 를 담을 클래스
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
+        // TODO 사용자가 필수 제공 항목(email 등)을 제공하지 않을 경우,
+        // DB 에러가 발생하여 로그인 처리가 불가능한 상태가 됨
+        // 하지만 provider 에게는 동의를 완료한 상태라 필수 제공 항목을 수정할 수가 없음
+        // 이를 원복하려면 사용자가 동의철회를 해야 함
+        // 동의철회는 Naver, Google 등에 직접 들어가서 하는 수 밖에 없음
         User user = saveOrUpdate(attributes);
 
         // SessionUser : 세션에 사용자 정보를 저장하기 위한 Dto 클래스
